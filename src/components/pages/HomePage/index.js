@@ -1,9 +1,25 @@
-// https://github.com/diegohaz/arc/wiki/Atomic-Design
 import React from 'react'
+import styled from 'styled-components'
 
+import {Map,Footer,DownButton} from 'components'
+
+const Wrapper = styled.div`
+`
+const ButtonContainer = styled.div`
+  display:flex;
+  justify-content:center;
+  position:relative;
+  top:-28px;
+`
 const HomePage = () => {
   return (
-    <div>Hello World</div>
+    <Wrapper>
+      <Map/>
+      <ButtonContainer>
+        <DownButton/>
+      </ButtonContainer>
+      <Footer/>
+    </Wrapper>
   )
 }
 

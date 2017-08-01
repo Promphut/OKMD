@@ -4,7 +4,6 @@ import { injectGlobal, ThemeProvider } from 'styled-components'
 
 import { HomePage } from 'components'
 
-// https://github.com/diegohaz/arc/wiki/Styling
 import theme from './themes/default'
 
 injectGlobal`
