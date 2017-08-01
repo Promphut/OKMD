@@ -5,6 +5,7 @@ const Btn = styled.button`
   width:56px;
   height:56px;
   border-radius:50%;
+  z-index:1;
 `
 
 const DownButton = ({children}) => {
