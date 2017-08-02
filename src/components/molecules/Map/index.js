@@ -13,7 +13,7 @@ const Img = styled.img`
 
 const Map = ({children}) => {
   return (
-    <Img src={'/thumbnail.png'}>
+    <Img src={'/map.png'}>
       {children}
     </Img>      
   )

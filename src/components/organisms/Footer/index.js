@@ -25,23 +25,24 @@ const Img = styled.img`
   width:64px;
   height:64px;
   border-radius:50%;
-  background-color:#C4C4C4;
   margin-right:30px;
+  background-size:cover;
+  background-position:center;
 `
 const Menu = styled(Link)`
   font-family:'kanit';
   font-size:18px;
-  color:#000;
+  color:#FEF5EE;
 `
 const Line = styled.div`
   width:100%;
   height:1px;
-  background-color:#C4C4C4;
+  background-color:#FEF5EE;
 `
 const Desc = styled.p`
   font-family:'kanit';
   font-size:14px;
-  color:#C4C4C4;
+  color:#FEF5EE;
   padding:8px 0 8px 0;
   margin:0;
 `
@@ -50,7 +51,7 @@ const Dot = styled.div`
   width:6px;
   height:6px;
   border-radius:50%;
-  background-color:#C4C4C4;
+  background-color:#FEF5EE;
   margin:1px 15px 0 15px;
 `
 const MenuRow = styled.div`
@@ -59,7 +60,7 @@ const MenuRow = styled.div`
   padding:10px 0 10px 0;
 `
 const Icon = styled.a`
-  color:#c4c4c4;
+  color:#FEF5EE;
   font-size:16px;
   margin:0 30px 8px 0;
 `
@@ -69,7 +70,7 @@ const Footer = () => {
       <div className='container'>
         <Row>
           <Left>
-            <Img/>
+            <Img src='/HUB.png'/>
             <MenuRow style={{height:40}}>
               <Menu to='/'>หน้าหลัก</Menu>
               <Dot/>

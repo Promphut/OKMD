@@ -3,9 +3,9 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { TopMenu } from 'components'
 const Nav = styled.nav`
-  position:relative;
+  position:absolute;
   width:100%;
-  background:white;
+  background:none;
   top:0;
   Left:0;
 `
@@ -16,7 +16,7 @@ const Container = styled.div`
   justify-content:space-between;
 `
 const Logo = styled.img`
-  height:56px;
+  height:100px;
 `
 const Left = styled.div`
   flex:1;
@@ -31,11 +31,11 @@ const Topbar = ({children}) => {
     <Nav>
       <Container className='container'>
         <Left>
-          <Link to="/"><Logo src='/okmd-logo.png'/></Link>
+          <Link to="/"><Logo src='/HUB.png'/></Link>
         </Left>
         <Right>
-          <TopMenu>เซรามิก</TopMenu>
-          <TopMenu style={{marginLeft:"30px"}}>รถม้า</TopMenu>
+          <TopMenu to='/seramic'>เซรามิก</TopMenu>
+          <TopMenu to='/horsecar' style={{marginLeft:"30px"}}>รถม้า</TopMenu>
         </Right>
       </Container>
     </Nav>      

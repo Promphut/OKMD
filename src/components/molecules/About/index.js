@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 const Con = styled.div`
   background:#FEF5EE;
-  padding:100px 0 80px 0;
+  padding:80px 0 80px 0;
   position:relative;
   top:-56px;
 `

@@ -10,6 +10,9 @@ injectGlobal`
   body {
     margin: 0;
   }
+  a:hover{
+    text-decoration:none;
+  }
 `
 
 const App = () => {
