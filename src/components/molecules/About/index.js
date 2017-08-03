@@ -6,25 +6,41 @@ const Con = styled.div`
   padding:80px 0 80px 0;
   position:relative;
   top:-56px;
+  @media (max-width:480px){
+    position:static;
+    padding:10px 0 10px 0;
+  }
 `
 const Head = styled.h3`
   font-family:'kanit';
   font-size:32px;
-  font-weight:bold;
+  font-weight:medium;
   text-align:center;
   color:#000;
+  @media (max-width:480px){
+    font-size:14px;
+    margin:5px 0 5px 0;
+  }
 `
 const Line = styled.div`
   width:48px;
   height:4px;
   margin:20px auto 30px auto;
   background:#F2DACE;
+  @media (max-width:480px){
+    width:24px;
+    height:3px;
+    margin:0px auto 10px auto;
+  }
 `
 const Detail = styled.p`
   color:#5D5C61;
   font-family:'kanit';
   font-size:22px;
   text-align:center;
+  @media (max-width:480px){
+    font-size:11px;
+  }
 `
 
 const About = ({children,style}) => {

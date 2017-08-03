@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import {Map,Footer,DownButton,Topbar,About,HomeMain} from 'components'
+import {Map,DownButton,About,HomeMain} from 'components'
 
 const Wrapper = styled.div`
 `
@@ -10,11 +10,18 @@ const ButtonContainer = styled.div`
   justify-content:center;
   position:relative;
   top:-28px;
+  @media (max-width:480px){
+    display:none;
+  }
 `
 const Main = styled.div`
   display:flex;
   justify-content:center;
   padding:46px 0 100px 0;
+  @media (max-width:480px){
+    display:block;
+    padding:10px 0 40px 0;
+  }
 `
 const Flex = styled.div`
   flex:1;
@@ -25,11 +32,15 @@ const Line = styled.div`
   height:550px;
   background-color:#FEF5EE;
   margin:30px 30px 0 30px;
+  @media (max-width:480px){
+    margin:12px auto 12px auto;
+    width:90%;
+    height:3px;
+  }
 `
 const HomePage = () => {
   return (
     <Wrapper>
-      <Topbar/>
       <Map/>
       <ButtonContainer>
         <DownButton/>
@@ -44,7 +55,6 @@ const HomePage = () => {
           <HomeMain/>
         </Flex>
       </Main>
-      <Footer/>
     </Wrapper>
   )
 }

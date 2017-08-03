@@ -18,9 +18,11 @@ const Btn = styled(NavLink)`
     color:white;
     background:#1999A3;
   }
-  .active{
-    color:white;
-    background:#1999A3;
+  @media (max-width:480px){
+    font-size:16px;
+    height:38px;
+    padding-right:15px;
+    padding-left:15px;
   }
 `
 
@@ -30,4 +32,4 @@ const TopMenu = ({children,style,to}) => {
   )
 }
 
-export default TopMenu
+export default TopMenu 
