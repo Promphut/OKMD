@@ -56,6 +56,9 @@ const Menu = styled(Link)`
   @media (max-width:480px){
     font-size:16px;
   }
+  &:hover{
+    color:white;
+  }
 `
 const Line = styled.div`
   width:100%;
@@ -101,6 +104,10 @@ const Icon = styled.a`
     font-size:14px;
     margin:0 10px 0px 10px;
   }
+  &:hover{
+    color:white;
+    cursor:pointer;
+  }
 `
 const Footer = () => {
   return (
@@ -112,9 +119,9 @@ const Footer = () => {
             <MenuRow style={{height:40}}>
               <Menu to='/'>หน้าหลัก</Menu>
               <Dot/>
-              <Menu to='/'>เซรามิก</Menu>
+              <Menu to='/seramic'>เซรามิก</Menu>
               <Dot/>
-              <Menu to='/'>รถม้า</Menu>
+              <Menu to='/carriage'>รถม้า</Menu>
             </MenuRow>
           </Left>
           <Line className='visible-xs'/>

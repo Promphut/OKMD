@@ -51,7 +51,7 @@ const Topbar = ({children,location}) => {
         </Left>
         <Right>
           <TopMenu to='/seramic'>เซรามิก</TopMenu>
-          <TopMenu to='/horsecar' style={{marginLeft:screen.width>480?"30px":15}}>รถม้า</TopMenu>
+          <TopMenu to='/carriage' style={{marginLeft:screen.width>480?"30px":15}}>รถม้า</TopMenu>
         </Right>
       </Container>
     </Nav>      

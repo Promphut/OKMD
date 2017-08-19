@@ -129,46 +129,84 @@ const BreakLine = styled.div`
     height:3px;
   }
 `
-const Page = () => {
-  var isDesk = screen.width>480?true:false
-  return (
-    <Wrapper>
-      <Map/>
-      <Con>
-        <Head>รถม้าลำปาง</Head>
-        <Line/>
-        <VDO><img src="/thumbnail.png"  alt=""/></VDO>
-      </Con>
-      <Main className='container'>
-        <Flex2>
-          <LImg src='/h1.png'/>
-          <SImg src='/h2.png'/>
-          <SImg src='/h3.png'/>
-        </Flex2>
-        <Flex>
-          <H3>ศูนย์พัฒนาอุตสาหกรรม</H3>
-          <Detail>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad sed do eiusmod tempor</Detail>
-        </Flex>
-      </Main>
-      <div className='container' style={{paddingBottom:isDesk?80:20}}>
-        <BreakLine></BreakLine>
-        <H3 style={isDesk?{textAlign:'center',marginTop:80}:{textAlign:'left',marginTop:20}}>จุดบริการรถม้า</H3>
-        <Main style={isDesk?{paddingBottom:16}:{padding:'5px 0 15px 0'}}>
-          <Flex2 className='rmpadding'>
-            <LImg src='/h1.png' style={{height:isDesk?424:162}}/>
-          </Flex2>
-          <Flex2 className='rmpadding'>
-            <LImg src='/h1.png' className='hidden-xs' style={{height:isDesk?200:78}}/>
-            <SImg src='/h2.png' style={{height:isDesk?200:78}}/>
-            <SImg src='/h3.png' style={{height:isDesk?200:78}}/>
-          </Flex2>
-        </Main>
-        <Detail>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit.
-        </Detail>
-      </div>
-    </Wrapper>
-  )
-}
+const Box = styled.div`
 
+`
+
+class Page extends React.Component {
+
+  goto = (query) =>{
+    if(query.match(/section=[1-9][0-9]*/)){
+      var section = parseInt(query.match(/section=[1-9][0-9]*/)[0].split('section=')[1])
+      if(section<11&&section>0){
+        console.log(section)
+        var offsets = document.getElementById(section).getBoundingClientRect();
+        var posTop = offsets.top
+        window.scrollBy(0, posTop);
+      }
+    }
+  } 
+  componentDidMount() {
+    this.goto(this.props.location.search)
+  }
+  
+  componentWillReceiveProps(nextProps) {
+    if(nextProps.location.search!=this.props.location.search){
+      this.goto(nextProps.location.search)
+    }
+  }
+  
+  
+  render(){
+  var isDesk = screen.width>480?true:false
+  var Det = []
+  for(var i=1;i<10;i+=2){
+    Det.push(<Box key={i}> 
+    <Main className='container' id={i}>
+      <Flex2>
+        <LImg src='/h1.png'/>
+        <SImg src='/h2.png'/>
+        <SImg src='/h3.png'/>
+      </Flex2>
+      <Flex>
+        <H3>ศูนย์พัฒนาอุตสาหกรรม</H3>
+        <Detail>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad sed do eiusmod tempor</Detail>
+      </Flex>
+    </Main>
+    <div className='container' style={{paddingBottom:isDesk?80:20}} id={i+1}>
+      <BreakLine></BreakLine>
+      <H3 style={isDesk?{textAlign:'center',marginTop:80}:{textAlign:'left',marginTop:20}}>จุดบริการรถม้า</H3>
+      <Main style={isDesk?{paddingBottom:16}:{padding:'5px 0 15px 0'}}>
+        <Flex2 className='rmpadding'>
+          <LImg src='/h1.png' style={{height:isDesk?424:162}}/>
+        </Flex2>
+        <Flex2 className='rmpadding'>
+          <LImg src='/h1.png' className='hidden-xs' style={{height:isDesk?200:78}}/>
+          <SImg src='/h2.png' style={{height:isDesk?200:78}}/>
+          <SImg src='/h3.png' style={{height:isDesk?200:78}}/>
+        </Flex2>
+      </Main>
+      <Detail>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit.
+      </Detail>
+    </div>
+  </Box>)
+  }
+
+
+    return (
+      <Wrapper>
+        <Map/>
+        <Con>
+          <Head>รถม้าลำปาง</Head>
+          <Line/>
+          <VDO><img src="/thumbnail.png"  alt=""/></VDO>
+        </Con>
+
+        {Det}
+
+      </Wrapper>
+    )
+  }
+}
 export default Page
