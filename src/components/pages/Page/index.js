@@ -1,7 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-
+import {seramic,carriage} from './data.js'
 import {Map,DownButton,About,HomeMain} from 'components'
+import truncate from 'lodash/truncate';
 
 const Wrapper = styled.div`
   @media (max-width:480px){
@@ -23,24 +24,33 @@ const Con = styled.div`
 const Main = styled.div`
   display:flex;
   justify-content:center;
+  height:574px;
   padding:24px 0 80px 0;
   @media (max-width:480px){
     display:block;
+    height:auto;  
     padding:24px 0 0px 0;
   }
 `
 const Flex = styled.div`
   flex:1;
+  height:470px;
   padding:0 15px 0 15px;
+  overflow-y:auto;
   @media (max-width:480px){
+    height:auto;
     padding:16px 15px 20px 15px;
   }
 `
 const Flex2 = styled.div`
   flex:1;
+  height:470px;  
   padding:0 15px 0 15px;
   display:flex;
   flex-wrap: wrap;
+  @media (max-width:480px){
+    height:auto;
+  }
 `
 const Head = styled.h2`
   font-family:'kanit';
@@ -74,10 +84,14 @@ const VDO = styled.div`
   }
   @media (max-width:480px){
     width:100%;
-    height:162px;
+    height:182px;
     img{
       width:100%;
       height:162px;
+    }
+    iframe{
+      width:100%;
+      height:182px;      
     }
   }
 `
@@ -96,6 +110,7 @@ const Detail = styled.p`
   color:#5D5C61;
   font-family:'kanit';
   font-size:22px;
+  margin:0;
   @media (max-width:480px){
     font-size:12px;
     margin:0;
@@ -132,9 +147,25 @@ const BreakLine = styled.div`
 const Box = styled.div`
 
 `
+const Seemore = styled.div`
+  color:#1999A3;
+  font-family:'kanit';
+  font-size:22px;
+  :hover{
+    text-decoration:underline;
+    cursor:pointer;
+  }
+  @media (max-width:480px){
+    font-size:12px;
+  }
+`
 
+const videoCariage = `<iframe width="736" height="414" src="https://www.youtube.com/embed/gIJH4rpsnC0" frameborder="0" allowfullscreen></iframe>`
+const videoSeramic = `<iframe width="736" height="414" src="https://www.youtube.com/embed/LAdIzY0OLrY" frameborder="0" allowfullscreen></iframe>`
 class Page extends React.Component {
-
+  state={
+    index:11
+  }
   goto = (query) =>{
     if(query.match(/section=[1-9][0-9]*/)){
       var section = parseInt(query.match(/section=[1-9][0-9]*/)[0].split('section=')[1])
@@ -145,7 +176,11 @@ class Page extends React.Component {
         window.scrollBy(0, posTop);
       }
     }
-  } 
+  }
+  showMore = (i,e) =>{
+    // console.log(i)
+    this.setState({index:i})
+  }
   componentDidMount() {
     this.goto(this.props.location.search)
   }
@@ -159,6 +194,8 @@ class Page extends React.Component {
   
   render(){
   var isDesk = screen.width>480?true:false
+  var isSeramic = this.props.location.pathname=='/seramic'?true:false
+  var data = isSeramic?seramic:carriage
   var Det = []
   for(var i=1;i<10;i+=2){
     Det.push(<Box key={i}> 
@@ -198,12 +235,38 @@ class Page extends React.Component {
       <Wrapper>
         <Map/>
         <Con>
-          <Head>รถม้าลำปาง</Head>
+          <Head>{isSeramic?"seramic":"รถม้าลำปาง"}</Head>
           <Line/>
-          <VDO><img src="/thumbnail.png"  alt=""/></VDO>
+          <VDO 	dangerouslySetInnerHTML={{
+								__html: isSeramic?videoSeramic:videoCariage
+					}}></VDO>
         </Con>
-
-        {Det}
+        {
+          data.map((d,i)=>(
+            <Box key={i}> 
+              <Main className='container' id={i}>
+                <Flex2>
+                  <LImg src={`/img${this.props.location.pathname}/${i+1}/1.jpg`||'/h1.png'}/>
+                  <SImg src={`/img${this.props.location.pathname}/${i+1}/2.jpg`||'/h1.png'}/>
+                  <SImg src={`/img${this.props.location.pathname}/${i+1}/3.jpg`||'/h1.png'}/>
+                </Flex2>
+                <Flex style={{overflowY:(this.state.index==i)?'auto':'hidden'}}>
+                  <H3>{d.name}</H3>
+                  <Detail>
+                  {(this.state.index==i)? d.desc:truncate( d.desc, {
+                    length:550,
+                    separator: ' ',
+                  })}
+                  </Detail>
+                  {(this.state.index!=i)&&<Seemore onClick={(e)=>this.showMore(i,e)}>
+                    seemore 
+                </Seemore>} 
+                </Flex>
+              </Main>
+            </Box>
+          ))
+        }
+        {/* {Det} */}
 
       </Wrapper>
     )
