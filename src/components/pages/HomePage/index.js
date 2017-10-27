@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import {Map,DownButton,About,HomeMain} from 'components'
+import {Map,DownButton,About,HomeMain,HomeMain2} from 'components'
 
 const Wrapper = styled.div`
 `
@@ -48,7 +48,7 @@ const HomePage = () => {
       <About/>
       <Main className='container'>
         <Flex>
-          <HomeMain/>
+          <HomeMain2/>
         </Flex>
         <Line></Line>
         <Flex>

@@ -25,9 +25,9 @@ const VDO = styled.div`
       height:162px;
     }
     iframe{
-      width:100%;
-      height:182px;      
-    }
+        width:100%;
+        height:182px;      
+      }
   }
 `
 const Head = styled(Link)`
@@ -69,19 +69,19 @@ const Btn = styled(Link)`
     font-size:12px;
   }
 `
-const videoCariage = `<iframe width="520" height="292" src="https://www.youtube.com/embed/gIJH4rpsnC0" frameborder="0" allowfullscreen></iframe>`
+const videoSeramic = `<iframe width="520" height="292" src="https://www.youtube.com/embed/LAdIzY0OLrY" frameborder="0" allowfullscreen></iframe>`
  
-const HomeMain= ({children}) => {
+const HomeMain2 = ({children}) => {
   return (
     <Container className='container'>
       <VDO dangerouslySetInnerHTML={{
-								__html:videoCariage
+								__html: videoSeramic
 					}}></VDO>
-      <Head to='/carriage'>รถม้า</Head>
-      <Text>“รถม้าลำปาง” เอกลักษณ์ที่ยังหายใจของจังหวัดลำปาง กับเส้นทาง Hub ความฮู้ เรียนรู้เรื่องรถม้าลำปางในทุกมิติ ทั้งม้า รถม้า อาหารม้า คนขับรถม้า</Text>
-      <Btn to='/carriage'><span>รถม้า</span></Btn>
+      <Head to='/seramic'>เซรามิก</Head>
+      <Text>“เซรามิกลำปาง” เอกลักษณ์ที่ได้เปรียบจากสินทรัพย์ทางธรรมชาติและภูมิปัญญาท้องถิ่น กับเส้นทาง Hub ความฮู้ เรียนรู้กระบวนการของเซรามิกในทุกมิติ ตั้งแต่ดินขาวสู่ผลิตภัณฑ์สร้างสรรค์</Text>
+      <Btn to='/seramic'><span>เซรามิก</span></Btn>
     </Container>     
   )
 }
 
-export default HomeMain
+export default HomeMain2
