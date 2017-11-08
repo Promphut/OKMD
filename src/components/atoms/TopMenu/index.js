@@ -7,7 +7,7 @@ const Btn = styled(NavLink)`
   font-size:24px;
   color:#1999A3;
   height:56px;
-  background:none;
+  background-color:white;
   padding-right:30px;
   padding-left:30px;
   font-family:'kanit';

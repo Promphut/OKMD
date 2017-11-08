@@ -11,9 +11,9 @@ const Img = styled.img`
   background-position:center;
 `
 
-const Map = ({children}) => {
+const Map = ({children,src}) => {
   return (
-    <Img src={'/map.png'}>
+    <Img src={src}>
       {children}
     </Img>      
   )

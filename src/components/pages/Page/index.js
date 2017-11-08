@@ -52,6 +52,35 @@ const Flex2 = styled.div`
     height:auto;
   }
 `
+const Main2 = styled.div`
+display:flex;
+justify-content:center;
+padding:24px 0 80px 0;
+@media (max-width:480px){
+  display:block;
+  height:auto;  
+  padding:24px 0 0px 0;
+}
+`
+const Flex3 = styled.div`
+flex:6;
+height:424px;
+overflow-y:auto;
+@media (max-width:480px){
+  height:auto;
+  padding:16px 15px 20px 15px;
+}
+`
+const Flex4 = styled.div`
+flex:4;
+height:424px;  
+padding:0 0 0 15px;
+display:flex;
+flex-wrap: wrap;
+@media (max-width:480px){
+  height:auto;
+}
+`
 const Head = styled.h2`
   font-family:'kanit';
   font-size:48px;
@@ -196,44 +225,10 @@ class Page extends React.Component {
   var isDesk = screen.width>480?true:false
   var isSeramic = this.props.location.pathname=='/seramic'?true:false
   var data = isSeramic?seramic:carriage
-  var Det = []
-  for(var i=1;i<10;i+=2){
-    Det.push(<Box key={i}> 
-    <Main className='container' id={i}>
-      <Flex2>
-        <LImg src='/h1.png'/>
-        <SImg src='/h2.png'/>
-        <SImg src='/h3.png'/>
-      </Flex2>
-      <Flex>
-        <H3>ศูนย์พัฒนาอุตสาหกรรม</H3>
-        <Detail>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad sed do eiusmod tempor</Detail>
-      </Flex>
-    </Main>
-    <div className='container' style={{paddingBottom:isDesk?80:20}} id={i+1}>
-      <BreakLine></BreakLine>
-      <H3 style={isDesk?{textAlign:'center',marginTop:80}:{textAlign:'left',marginTop:20}}>จุดบริการรถม้า</H3>
-      <Main style={isDesk?{paddingBottom:16}:{padding:'5px 0 15px 0'}}>
-        <Flex2 className='rmpadding'>
-          <LImg src='/h1.png' style={{height:isDesk?424:162}}/>
-        </Flex2>
-        <Flex2 className='rmpadding'>
-          <LImg src='/h1.png' className='hidden-xs' style={{height:isDesk?200:78}}/>
-          <SImg src='/h2.png' style={{height:isDesk?200:78}}/>
-          <SImg src='/h3.png' style={{height:isDesk?200:78}}/>
-        </Flex2>
-      </Main>
-      <Detail>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum Lorem ipsum dolor sit.
-      </Detail>
-    </div>
-  </Box>)
-  }
-
 
     return (
       <Wrapper>
-        <Map/>
+        <Map src={isSeramic?'/img/seramic/map.png':'/img/carriage/map.png'}/>
         <Con>
           <Head>{isSeramic?"seramic":"รถม้าลำปาง"}</Head>
           <Line/>
@@ -244,25 +239,49 @@ class Page extends React.Component {
         {
           data.map((d,i)=>(
             <Box key={i}> 
-              <Main className='container' id={i}>
-                <Flex2>
-                  <LImg src={`/img${this.props.location.pathname}/${i+1}/1.jpg`||'/h1.png'}/>
-                  <SImg src={`/img${this.props.location.pathname}/${i+1}/2.jpg`||'/h1.png'}/>
-                  <SImg src={`/img${this.props.location.pathname}/${i+1}/3.jpg`||'/h1.png'}/>
-                </Flex2>
-                <Flex style={{overflowY:(this.state.index==i)?'auto':'hidden'}}>
-                  <H3>{d.name}</H3>
-                  <Detail>
-                  {(this.state.index==i)? d.desc:truncate( d.desc, {
-                    length:550,
-                    separator: ' ',
-                  })}
-                  </Detail>
-                  {(this.state.index!=i)&&<Seemore onClick={(e)=>this.showMore(i,e)}>
-                    seemore 
-                </Seemore>} 
-                </Flex>
-              </Main>
+              {d.map?
+              <div className='container' style={{paddingBottom:isDesk?80:20}} id={i}> 
+                <Main2 style={isDesk?{paddingBottom:16}:{padding:'5px 0 15px 0'}}>
+                  <Flex3 className='rmpadding'>
+                    <LImg src={`/img${this.props.location.pathname}/${i+1}/1.jpg`||'/h1.png'} style={{height:isDesk?424:162,marginBottom:0}}/>
+                  </Flex3>
+                  <Flex4 className='rmpadding'>
+                    <SImg src={`/img${this.props.location.pathname}/${i+1}/2.jpg`||'/h1.png'} style={{paddingRight:7,height:isDesk?204:78,marginBottom:14}}/>
+                    <SImg src={`/img${this.props.location.pathname}/${i+1}/3.jpg`||'/h1.png'} style={{paddingLeft:7,height:isDesk?204:78,marginBottom:14}}/>
+                    <LImg src={`/img${this.props.location.pathname}/${i+1}/1.jpg`||'/h1.png'} className='hidden-xs' style={{height:isDesk?204:78,marginBottom:0}}/>                    
+                  </Flex4>
+                </Main2>
+                <H3>{d.name}</H3>
+                <Detail>
+                {(this.state.index==i)? d.desc:truncate( d.desc, {
+                  length:550,
+                  separator: ' ',
+                })}
+                {(this.state.index!=i)&&<Seemore onClick={(e)=>this.showMore(i,e)} style={{display:'inline'}}>
+                  seemore 
+              </Seemore>}
+                </Detail>
+                
+              </div > 
+              :<Main className='container' id={i}>
+              <Flex2>
+                <LImg src={`/img${this.props.location.pathname}/${i+1}/1.jpg`||'/h1.png'}/>
+                <SImg style={{paddingRight:7}} src={`/img${this.props.location.pathname}/${i+1}/2.jpg`||'/h1.png'}/>
+                <SImg style={{paddingLeft:7}} src={`/img${this.props.location.pathname}/${i+1}/3.jpg`||'/h1.png'}/>
+              </Flex2>
+              <Flex style={{overflowY:(this.state.index==i)?'auto':'hidden'}}>
+                <H3>{d.name}</H3>
+                <Detail>
+                {(this.state.index==i)? d.desc:truncate( d.desc, {
+                  length:550,
+                  separator: ' ',
+                })}
+                </Detail>
+                {(this.state.index!=i)&&<Seemore onClick={(e)=>this.showMore(i,e)}>
+                  seemore 
+              </Seemore>} 
+              </Flex>
+            </Main>}
             </Box>
           ))
         }

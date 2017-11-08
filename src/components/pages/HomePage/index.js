@@ -41,7 +41,7 @@ const Line = styled.div`
 const HomePage = () => {
   return (
     <Wrapper>
-      <Map/>
+      <Map src={'/map.png'}/>
       <ButtonContainer>
         <DownButton/>
       </ButtonContainer>

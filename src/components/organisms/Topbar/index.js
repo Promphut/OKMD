@@ -47,7 +47,7 @@ const Topbar = ({children,location}) => {
     <Nav stat={stat}>
       <Container className='container'>
         <Left>
-          <Link to="/"><Logo src='/HUB.png'/></Link>
+          {location.pathname != '/'&&<Link to="/"><Logo src='/HUB.png'/></Link>}
         </Left>
         <Right>
           <TopMenu to='/seramic'>เซรามิก</TopMenu>
