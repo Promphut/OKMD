@@ -50,7 +50,16 @@ const About = ({children,style}) => {
         <Head>เกี่ยวกับเรา</Head>
         <Line/>
         <Detail>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa
+        สุดยอดนักออกแบบรถม้าและชามตราไก่ในยุค 4.0 อยู่ที่ไหน?<br/>
+
+ทุกวันนี้ การศึกษาไม่ได้จำกัดเฉพาะห้องเรียน แหล่งเรียนรู้สาธารณะไม่ว่าสวนสัตว์ สนามเด็กเล่น สนามกีฬา <br/>
+หรือแม้แต่สื่อออนไลน์ ล้วนเป็นอาณาจักรกว้างใหญ่ที่เปิดโอกาสให้ประชาชนทุกกลุ่มทุกวัยได้เข้าถึงทักษะความรู้ต่างๆ <br/>
+และพัฒนาศักยภาพที่ซ่อนอยู่ภายใน ขึ้นอยู่กับว่าเราจะใช้โอกาสต่อยอดจากองค์ความรู้<br/>ที่เหมือนออกซิเจนรอบตัวไปสรรค์สร้างสิ่งใหม่ๆ อย่างไร<br/>
+ขั้นตอนการผลิตรถม้าและชามตราไก่อาศัยภูมิปัญญาพื้นถิ่น ผนวกกับเทคโนโลยีสมัยใหม่อย่างไร?<br/>
+
+ที่นครลำปาง เมืองแห่งมรดกวัฒนธรรมและธรรมชาติ แม้แต่สัตว์อย่างม้าและไก่<br/> มีเรื่องราวน่าสนใจให้เข้ามาสืบค้นและนำไปประยุกต์มากมาย<br/>
+
+เมืองแห่งขุมทรัพย์ทางปัญญานี้ ไม่ได้มีแค่สถานที่ให้คุณค้นพบคำตอบและแรงบันดาลใจ แต่ให้คุณได้ทดลองลงมือทำ!
         </Detail>
       </div>
     </Con>    

@@ -128,12 +128,12 @@ const Footer = () => {
           <Right>
             <Desc>สำนักงานบริหารและพัฒนาองค์ความรู้ (องค์การมหาชน) โทรศัพท์ : 0 2105 6500 อีเมล : info@okmd.or.th</Desc>
             <MenuRow>
-              <Icon><i className="fa fa-facebook" aria-hidden="true"></i></Icon>
+              {/* <Icon><i className="fa fa-facebook" aria-hidden="true"></i></Icon>
               <Icon><i className="fa fa-instagram" aria-hidden="true"></i></Icon>
               <Icon><i className="fa fa-twitter" aria-hidden="true"></i></Icon>
               <Icon><i className="fa fa-youtube-play" aria-hidden="true"></i></Icon>
               <Icon><i className="fa fa-google-plus" aria-hidden="true"></i></Icon>
-              <Icon><i className="fa fa-google-plus" aria-hidden="true"></i></Icon>
+              <Icon><i className="fa fa-google-plus" aria-hidden="true"></i></Icon> */}
             </MenuRow>
           </Right>
         </Row>

@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import {seramic,carriage} from './data.js'
 import {Map,DownButton,About,HomeMain} from 'components'
 import truncate from 'lodash/truncate';
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 
 const Wrapper = styled.div`
   @media (max-width:480px){
@@ -35,7 +36,7 @@ const Main = styled.div`
 const Flex = styled.div`
   flex:1;
   height:470px;
-  padding:0 15px 0 15px;
+  padding:0 4px 0 16px;
   overflow-y:auto;
   @media (max-width:480px){
     height:auto;
@@ -45,7 +46,7 @@ const Flex = styled.div`
 const Flex2 = styled.div`
   flex:1;
   height:470px;  
-  padding:0 15px 0 15px;
+  padding:0 4px 0 4px;
   display:flex;
   flex-wrap: wrap;
   @media (max-width:480px){
@@ -74,7 +75,7 @@ overflow-y:auto;
 const Flex4 = styled.div`
 flex:4;
 height:424px;  
-padding:0 0 0 15px;
+padding:0 0 0 4px;
 display:flex;
 flex-wrap: wrap;
 @media (max-width:480px){
@@ -148,7 +149,7 @@ const Detail = styled.p`
 const LImg = styled.img`
   width:100%;
   height:306px;
-  margin:0 0 16px 0;
+  margin:0 0 4px 0;
   object-fit: cover;
   object-position:center;
   @media (max-width:480px){
@@ -158,7 +159,7 @@ const LImg = styled.img`
 `
 const SImg = styled.img`
   width:50%;
-  height:148px;
+  height:159px;
   object-fit: cover;
   object-position:center;
   @media (max-width:480px){
@@ -188,35 +189,68 @@ const Seemore = styled.div`
     font-size:12px;
   }
 `
+const GGMap = styled.div`
+  height:210px;
+  width:100%;
+  @media (max-width:480px){
+    margin:0 0 8px 0;
+    height:162px;
+  }
+`
+const MyMapComponent = withScriptjs(withGoogleMap((props) =>
+<GoogleMap
+  defaultZoom={props.z}
+  defaultCenter={{ lat: props.lat, lng: props.lng }}
+>
+  {props.isMarkerShown && <Marker position={{ lat: props.lat, lng: props.lng }} />}
+</GoogleMap>
+))
 
 const videoCariage = `<iframe width="736" height="414" src="https://www.youtube.com/embed/gIJH4rpsnC0" frameborder="0" allowfullscreen></iframe>`
 const videoSeramic = `<iframe width="736" height="414" src="https://www.youtube.com/embed/LAdIzY0OLrY" frameborder="0" allowfullscreen></iframe>`
 class Page extends React.Component {
   state={
-    index:11
+    index:12,
+    isMarkerShown: false    
   }
   goto = (query) =>{
     if(query.match(/section=[1-9][0-9]*/)){
       var section = parseInt(query.match(/section=[1-9][0-9]*/)[0].split('section=')[1])
       if(section<11&&section>0){
-        console.log(section)
+        // console.log(section)
         var offsets = document.getElementById(section).getBoundingClientRect();
         var posTop = offsets.top
         window.scrollBy(0, posTop);
       }
     }
   }
-  showMore = (i,e) =>{
+  showMore = (e) =>{
+    e.preventDefault();
+    var a = e.target.id
+    var i = a.split("s")[1]
     // console.log(i)
     this.setState({index:i})
   }
+  delayedShowMarker = () => {
+    this.setState({
+      isMarkerShown:false
+    },()=>{
+      setTimeout(() => {
+        this.setState({ isMarkerShown: true })
+      }, 500)
+    })
+  }
   componentDidMount() {
+    this.delayedShowMarker()
     this.goto(this.props.location.search)
   }
   
   componentWillReceiveProps(nextProps) {
     if(nextProps.location.search!=this.props.location.search){
       this.goto(nextProps.location.search)
+    }
+    if(nextProps.location.pathname!=this.props.location.pathname){
+      this.delayedShowMarker()
     }
   }
   
@@ -225,6 +259,86 @@ class Page extends React.Component {
   var isDesk = screen.width>480?true:false
   var isSeramic = this.props.location.pathname=='/seramic'?true:false
   var data = isSeramic?seramic:carriage
+  var ele = []
+  for (var i in data) {
+    let d = data[i]
+    var ind = parseInt(i)+1
+    if(d.map){
+      var dm = d.map.split('/')
+      var mm = dm[6].split(',')
+      var lat = parseFloat(mm[0].split('@')[1]) 
+      var lng = parseFloat(mm[1]) 
+      var z = parseInt(mm[2].split('z')[0]) 
+      // console.log(lat,lng,z) 
+    }
+    
+    ele.push(
+      <Box key={i}> 
+        {d.map?
+        <div className='container' style={{paddingBottom:isDesk?80:20}} id={ind}> 
+          <Main2 style={isDesk?{paddingBottom:16}:{padding:'5px 0 15px 0'}}>
+            <Flex3 className='rmpadding'>
+              <LImg src={`/img${this.props.location.pathname}/${ind}/1.jpg`||'/h1.png'} style={{height:isDesk?424:162,marginBottom:0}}/>
+            </Flex3>
+            <Flex4 className='rmpadding'>
+              {/* <SImg src={`/img${this.props.location.pathname}/${ind}/2.jpg`||'/h1.png'} style={{paddingRight:2,height:isDesk?204:78,marginBottom:4}}/>
+              <SImg src={`/img${this.props.location.pathname}/${ind}/3.jpg`||'/h1.png'} style={{paddingLeft:2,height:isDesk?204:78,marginBottom:4}}/> */}
+              <LImg src={`/img${this.props.location.pathname}/${ind}/2.jpg`||'/h1.png'} className='hidden-xs' style={{height:isDesk?210:78,marginBottom:4}}/>
+              <GGMap>
+                {this.state.isMarkerShown&&<MyMapComponent
+                  isMarkerShown
+                  googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places"
+                  lat={lat}
+                  lng={lng}
+                  z={z}
+                  loadingElement={<div style={{ height: `100%` }} />}
+                  containerElement={<div style={{ height:isDesk?'210px':'162px' }} />}
+                  mapElement={<div style={{ height: `100%` }} />}
+                />}
+              </GGMap>                                         
+              {/* <LImg src={`/img${this.props.location.pathname}/${ind}/3.jpg`||'/h1.png'} className='hidden-xs' style={{height:isDesk?210:78,marginBottom:0}}/>                     */}
+            </Flex4>
+          </Main2>
+          <H3>{d.name}</H3>
+          <Detail>
+          {(this.state.index==ind)? d.desc:truncate( d.desc, {
+            length:550,
+            separator: ' ',
+          })}
+          {(this.state.index==ind&&d.addr)&&<span><br/>
+          <br/>{d.addr}
+          <br/>{d.time}
+          <br/>{d.tel}</span>}
+          {(this.state.index!=ind)&&<Seemore onClick={this.showMore} style={{display:'inline'}} id={`s${ind}`}>
+            seemore 
+        </Seemore>}
+          </Detail>
+          
+        </div > 
+        :<Main className='container' id={ind}>
+        <Flex2>
+          <LImg src={`/img${this.props.location.pathname}/${ind}/1.jpg`||'/h1.png'}/>
+          <SImg style={{paddingRight:2}} src={`/img${this.props.location.pathname}/${ind}/2.jpg`||'/h1.png'}/>
+          <SImg style={{paddingLeft:2}} src={`/img${this.props.location.pathname}/${ind}/3.jpg`||'/h1.png'}/>
+        </Flex2>
+        <Flex style={{overflowY:(this.state.index==ind)?'auto':'hidden'}}>
+          <H3>{d.name}</H3>
+          <Detail>
+          {(this.state.index==ind)? d.desc:truncate( d.desc, {
+            length:550,
+            separator: ' ',
+          })}
+          {d.addr}
+          
+          </Detail>
+          {(this.state.index!=ind)&&<Seemore onClick={this.showMore} id={`s${ind}`}>
+            seemore 
+        </Seemore>} 
+        </Flex>
+      </Main>}
+    </Box>
+    )
+  }
 
     return (
       <Wrapper>
@@ -236,56 +350,8 @@ class Page extends React.Component {
 								__html: isSeramic?videoSeramic:videoCariage
 					}}></VDO>
         </Con>
-        {
-          data.map((d,i)=>(
-            <Box key={i}> 
-              {d.map?
-              <div className='container' style={{paddingBottom:isDesk?80:20}} id={i}> 
-                <Main2 style={isDesk?{paddingBottom:16}:{padding:'5px 0 15px 0'}}>
-                  <Flex3 className='rmpadding'>
-                    <LImg src={`/img${this.props.location.pathname}/${i+1}/1.jpg`||'/h1.png'} style={{height:isDesk?424:162,marginBottom:0}}/>
-                  </Flex3>
-                  <Flex4 className='rmpadding'>
-                    <SImg src={`/img${this.props.location.pathname}/${i+1}/2.jpg`||'/h1.png'} style={{paddingRight:7,height:isDesk?204:78,marginBottom:14}}/>
-                    <SImg src={`/img${this.props.location.pathname}/${i+1}/3.jpg`||'/h1.png'} style={{paddingLeft:7,height:isDesk?204:78,marginBottom:14}}/>
-                    <LImg src={`/img${this.props.location.pathname}/${i+1}/1.jpg`||'/h1.png'} className='hidden-xs' style={{height:isDesk?204:78,marginBottom:0}}/>                    
-                  </Flex4>
-                </Main2>
-                <H3>{d.name}</H3>
-                <Detail>
-                {(this.state.index==i)? d.desc:truncate( d.desc, {
-                  length:550,
-                  separator: ' ',
-                })}
-                {(this.state.index!=i)&&<Seemore onClick={(e)=>this.showMore(i,e)} style={{display:'inline'}}>
-                  seemore 
-              </Seemore>}
-                </Detail>
-                
-              </div > 
-              :<Main className='container' id={i}>
-              <Flex2>
-                <LImg src={`/img${this.props.location.pathname}/${i+1}/1.jpg`||'/h1.png'}/>
-                <SImg style={{paddingRight:7}} src={`/img${this.props.location.pathname}/${i+1}/2.jpg`||'/h1.png'}/>
-                <SImg style={{paddingLeft:7}} src={`/img${this.props.location.pathname}/${i+1}/3.jpg`||'/h1.png'}/>
-              </Flex2>
-              <Flex style={{overflowY:(this.state.index==i)?'auto':'hidden'}}>
-                <H3>{d.name}</H3>
-                <Detail>
-                {(this.state.index==i)? d.desc:truncate( d.desc, {
-                  length:550,
-                  separator: ' ',
-                })}
-                </Detail>
-                {(this.state.index!=i)&&<Seemore onClick={(e)=>this.showMore(i,e)}>
-                  seemore 
-              </Seemore>} 
-              </Flex>
-            </Main>}
-            </Box>
-          ))
-        }
-        {/* {Det} */}
+        
+        {ele}
 
       </Wrapper>
     )
