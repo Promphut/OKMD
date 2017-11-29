@@ -138,7 +138,7 @@ const Footer = () => {
           </Right>
         </Row>
         <Line className='hidden-xs'/>
-        <Desc className='hidden-xs'>ลิขสิทธิ์ © 2547 - 2560 OKMD สำนักงานบริหารและพัฒนาองค์ความรู้ (องค์การมหาชน) สงวนลิขสิทธิ์</Desc>
+        <Desc className='hidden-xs'>ลิขสิทธิ์ © 2560 OKMD สำนักงานบริหารและพัฒนาองค์ความรู้ (องค์การมหาชน) สงวนลิขสิทธิ์</Desc>
       </div>
     </Foot>
   )

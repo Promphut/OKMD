@@ -69,7 +69,7 @@ const Btn = styled(Link)`
     font-size:12px;
   }
 `
-const videoSeramic = `<iframe width="520" height="292" src="https://www.youtube.com/embed/LAdIzY0OLrY" frameborder="0" allowfullscreen></iframe>`
+const videoSeramic = `<iframe width="520" height="235" src="https://www.youtube.com/embed/LAdIzY0OLrY" frameborder="0" allowfullscreen></iframe>`
  
 const HomeMain2 = ({children}) => {
   return (

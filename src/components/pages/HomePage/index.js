@@ -43,7 +43,7 @@ const HomePage = () => {
     <Wrapper>
       <Map src={'/map.png'}/>
       <ButtonContainer>
-        <DownButton/>
+        {/* <DownButton/> */}
       </ButtonContainer>
       <About/>
       <Main className='container'>

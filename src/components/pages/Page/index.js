@@ -106,7 +106,7 @@ const Line = styled.div`
 `
 const VDO = styled.div`
   width:736px;
-  height:414px;
+  height:354px;
   margin:0 auto 0 auto;
   img{
     width:736px;
@@ -129,12 +129,23 @@ const H3 = styled.h3`
   font-family:'kanit';
   font-size:32px;
   font-weight:medium;
+  margin:0 0 8px 0;
   color:#000;
-  margin:0 0 16px 0;
   @media (max-width:480px){
+    margin:0 0 5px 0;    
     font-size:18px;
-    margin:0 0 10px 0;
   }
+`
+const H2 = styled.h2`
+font-family:'kanit';
+font-size:28px;
+font-weight:300;
+color:#000;
+margin:0 0 16px 0;
+@media (max-width:480px){
+  font-size:15px;
+  margin:0 0 10px 0;
+}
 `
 const Detail = styled.p`
   color:#5D5C61;
@@ -189,7 +200,7 @@ const Seemore = styled.div`
     font-size:12px;
   }
 `
-const GGMap = styled.div`
+const GGMap = styled.a`
   height:210px;
   width:100%;
   @media (max-width:480px){
@@ -206,8 +217,8 @@ const MyMapComponent = withScriptjs(withGoogleMap((props) =>
 </GoogleMap>
 ))
 
-const videoCariage = `<iframe width="736" height="414" src="https://www.youtube.com/embed/gIJH4rpsnC0" frameborder="0" allowfullscreen></iframe>`
-const videoSeramic = `<iframe width="736" height="414" src="https://www.youtube.com/embed/LAdIzY0OLrY" frameborder="0" allowfullscreen></iframe>`
+const videoCariage = `<iframe width="736" height="334" src="https://www.youtube.com/embed/gIJH4rpsnC0" frameborder="0" allowfullscreen></iframe>`
+const videoSeramic = `<iframe width="736" height="334" src="https://www.youtube.com/embed/LAdIzY0OLrY" frameborder="0" allowfullscreen></iframe>`
 class Page extends React.Component {
   state={
     index:12,
@@ -284,7 +295,7 @@ class Page extends React.Component {
               {/* <SImg src={`/img${this.props.location.pathname}/${ind}/2.jpg`||'/h1.png'} style={{paddingRight:2,height:isDesk?204:78,marginBottom:4}}/>
               <SImg src={`/img${this.props.location.pathname}/${ind}/3.jpg`||'/h1.png'} style={{paddingLeft:2,height:isDesk?204:78,marginBottom:4}}/> */}
               <LImg src={`/img${this.props.location.pathname}/${ind}/2.jpg`||'/h1.png'} className='hidden-xs' style={{height:isDesk?210:78,marginBottom:4}}/>
-              <GGMap>
+              <GGMap href={d.map}>
                 {this.state.isMarkerShown&&<MyMapComponent
                   isMarkerShown
                   googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyC4R6AN7SmujjPUIGKdyao2Kqitzr1kiRg&v=3.exp&libraries=geometry,drawing,places"
@@ -300,6 +311,7 @@ class Page extends React.Component {
             </Flex4>
           </Main2>
           <H3>{d.name}</H3>
+          <H2>{d.name2}</H2>  
           <Detail>
           {(this.state.index==ind)? d.desc:truncate( d.desc, {
             length:550,
@@ -323,6 +335,7 @@ class Page extends React.Component {
         </Flex2>
         <Flex style={{overflowY:(this.state.index==ind)?'auto':'hidden'}}>
           <H3>{d.name}</H3>
+          <H2>{d.name2}</H2>  
           <Detail>
           {(this.state.index==ind)? d.desc:truncate( d.desc, {
             length:550,

@@ -69,7 +69,7 @@ const Btn = styled(Link)`
     font-size:12px;
   }
 `
-const videoCariage = `<iframe width="520" height="292" src="https://www.youtube.com/embed/gIJH4rpsnC0" frameborder="0" allowfullscreen></iframe>`
+const videoCariage = `<iframe width="520" height="235" src="https://www.youtube.com/embed/gIJH4rpsnC0" frameborder="0" allowfullscreen></iframe>`
  
 const HomeMain= ({children}) => {
   return (
